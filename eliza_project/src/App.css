@@ -1,0 +1,505 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  overflow: hidden;
+  background-color: rgb(129, 0, 184);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+}
+
+.logo_blanc {
+  height: 40px;
+  margin-left: 10%;
+  margin-top: 20px;
+}
+
+.header_right {
+  display: inline-block;
+  position: relative;
+  color: #ffffff;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 50%;
+}
+
+.header_right::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+  transform-origin: bottom left;
+  transition: transform 0.25s ease-out;
+}
+
+.header_right:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.content {
+  background-image: url(assets/galeries_des_glaces.jpeg);
+  background-position: center;
+  background-size : cover;
+  background-repeat: no-repeat;
+  margin-top: 50px;
+  height: 100%;
+  border-bottom: 8px;
+}
+
+.filtre{
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  margin-top: -40px;
+  text-align: center;
+}
+
+h1{
+  font-weight: lighter;
+  font-size: 60px;
+  color: white;
+  text-align: center;
+  padding-top: 170px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.barre_home{
+  border-bottom: white 1px;
+  text-align: center;
+  width: 500px;
+  height: 2px;
+  background-color: white;
+}
+
+.courte_description{
+  font-weight: lighter;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  padding-top: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.button_home{
+  background-color: rgb(129, 0, 184);
+  color: rgb(255, 255, 255);
+  white-space: nowrap;
+  font-size: 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.4em 1em;
+  margin-bottom: 120px;
+}
+
+.button_home:hover{
+  background-color: rgb(255, 255, 255);
+  color: rgb(129, 0, 184);
+  white-space: nowrap;
+  font-size: 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.4em 1em;
+}
+
+.duo{
+  display: flex;
+  margin-top: 150px;
+  margin-bottom: 100px;
+}
+
+.gauche{
+  width: 50%;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: -30px;
+}
+
+.titre{
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  background-image: url(./assets/pinceaux.png);
+  background-position: 0;
+  background-size: 400px 100px;
+  background-repeat: no-repeat;
+  height: 50px;
+  margin-top: 20px;
+  font-weight: lighter;
+}
+
+.texte{
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  text-align: left;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.texte2{
+  color: #787878;
+  font-size: 20px;
+}
+
+.droite{
+  width: 50%;
+}
+
+.musee_berlin{
+  width: 90%;
+}
+
+.center{
+  text-align: center;
+}
+
+.button_home2{
+  background-color: rgb(129, 0, 184);
+  color: rgb(255, 255, 255);
+  white-space: nowrap;
+  font-size: 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.4em 1em;
+  margin-bottom: 80px;
+  margin-top: 50px;
+}
+
+.button_home2:hover{
+  background-color: rgb(255, 255, 255);
+  color: rgb(129, 0, 184);
+  white-space: nowrap;
+  font-size: 20px;
+  border-radius: 8px;
+  border: 1px solid rgb(129, 0, 184);
+  padding: 0.4em 1em;
+}
+
+.art_culture{
+  background-color: rgb(129, 0, 184);
+  padding-bottom: 30px;
+  left: 0;
+}
+
+.titre_culture{
+  color: white;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  padding-top: 20px;
+  margin-bottom: -60px;
+}
+
+.quatre{
+  display: flex;
+  width: 100%;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.art{
+  width: 25%;
+}
+
+.danse{
+  width: 25%;
+}
+
+.musique{
+  width: 25%;
+}
+
+.theatre{
+  width: 25%;
+}
+
+.art_img{
+  width: 300px;
+  height: auto;
+  border-radius: 8px;
+  padding-bottom: -50px;
+}
+
+.titre2{
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+.barre_desc{
+  border-bottom: rgb(129, 0, 184) 1px;
+  width: 250px;
+  height: 2px;
+  background-color: rgb(129, 0, 184);
+  margin-left: -0px;
+  margin-top: -10px;
+}
+
+.espace{
+  margin-top: 50px;
+}
+
+.duo2{
+  display: flex;
+  padding: 120px 70px 40px 100px;
+}
+
+.gauche_new{
+  width: 40%;
+}
+
+.space2{
+  width: 10%;
+}
+
+.droite_new{
+  width: 50%;
+  border-left: rgb(129, 0, 184) solid;
+}
+
+.titre3{
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  background-image: url(./assets/pinceaux.png);
+  background-position: 0;
+  background-size: 550px 100px;
+  background-repeat: no-repeat;
+  height: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  white-space: nowrap;
+}
+
+.barre_new{
+  border-bottom: rgb(129, 0, 184) 1px;
+  width: 250px;
+  height: 2px;
+  background-color: rgb(129, 0, 184);
+  margin-left: -0px;
+  margin-top: 20px;
+}
+
+.desc_new{
+  color: #787878;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 50px;
+}
+
+.sortie1{
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.monet_img{
+  height: 150px;
+  margin-left: 50px;
+  margin-right: 30px;
+}
+
+.cercle {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background: rgb(129, 0, 184);
+  text-align: end;
+  margin-left: 124.5px;
+}
+
+.cercle2 {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background: rgb(129, 0, 184);
+  text-align: end;
+  margin-left: 124.5px;
+  margin-top: 265px;
+}
+
+.cercle3 {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background: rgb(129, 0, 184);
+  text-align: end;
+  margin-left: 124.5px;
+  margin-top: 270px;
+}
+
+.titre_spectacle{
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(129, 0, 184);
+}
+
+.type{
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.quand{
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.lieu{
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.descriptif{
+  margin-left: 50px;
+  margin-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.descriptif1{
+  margin-left: 50px;
+  margin-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 30px;
+}
+
+.barre_claire{
+  border-bottom: rgb(245, 245, 245) ;
+  width: 620px;
+  background-color: rgb(245, 245, 245);
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 50px;
+}
+
+.citation{
+  background-image: url(assets/chambord.jpeg);
+  background-position: center;
+  background-size : cover;
+  background-repeat: no-repeat;
+}
+
+.guillemets{
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 150px;
+  margin-left: 220px;
+}
+
+.texte4{
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 40px;
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-top: -130px;
+}
+
+.auteur{
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 15px;
+  margin-left: 300px;
+  margin-top: 20px;
+}
+
+.filtre2{
+  background-color: rgba(0, 0, 0, 0.6);
+  padding-top: 150px;
+  padding-bottom: 100px;
+}
+
+.footer-dark {
+  padding:50px 0;
+  color:#f0f9ff;
+  background-color:#282d32;
+}
+
+.footer-dark h3 {
+  margin-top:0;
+  margin-bottom:12px;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.footer-dark ul {
+  padding:0;
+  list-style:none;
+  line-height:1.6;
+  font-size:14px;
+  margin-bottom:0;
+}
+
+.footer-dark ul a {
+  color:inherit;
+  text-decoration:none;
+  opacity:0.6;
+}
+
+.footer-dark ul a:hover {
+  opacity:0.8;
+}
+
+@media (max-width:767px) {
+  .footer-dark .item:not(.social) {
+    text-align:center;
+    padding-bottom:20px;
+  }
+}
+
+.footer-dark .item.text {
+  margin-bottom:36px;
+}
+
+@media (max-width:767px) {
+  .footer-dark .item.text {
+    margin-bottom:0;
+  }
+}
+
+.footer-dark .item.text p {
+  opacity:0.6;
+  margin-bottom:0;
+}
+
+.footer-dark .item.social {
+  text-align:center;
+}
+
+@media (max-width:991px) {
+  .footer-dark .item.social {
+    text-align:center;
+    margin-top:20px;
+  }
+}
+
+.footer-dark .item.social > a {
+  font-size:20px;
+  width:36px;
+  height:36px;
+  line-height:36px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  box-shadow:0 0 0 1px rgba(255,255,255,0.4);
+  margin:0 8px;
+  color:#fff;
+  opacity:0.75;
+}
+
+.footer-dark .item.social > a:hover {
+  opacity:0.9;
+}
+
+.footer-dark .copyright {
+  text-align:center;
+  padding-top:24px;
+  opacity:0.3;
+  font-size:13px;
+  margin-bottom:0;
+}
