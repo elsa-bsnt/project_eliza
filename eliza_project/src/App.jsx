@@ -8,14 +8,96 @@ import theatre from './assets/theatre.jpeg'
 import expoMonet from './assets/expo_monet.jpg'
 import nantes from './assets/voyage_nantes.jpg'
 import arles from './assets/arles.jpg'
+import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css'
+import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator} from "@chatscope/chat-ui-kit-react"
 import './App.css'
+import { useAttrs } from 'vue'
 
 function App() {
+  const [typing, setTyping] = useState(false);
+  const [messages, setMessages] = useState([
+    {
+      message: "Bonjour, je suis Ophélia ! Posez moi une question concernant les dernières sorties culturelles et je vous répondrait avec joie !",
+      sender: "ChatGpt"
+    }
+  ]) // []
+
+  const handleSend = async (message) => {
+    const newMessage = {
+      message: message,
+      sender: "user",
+      direction: "outgoing"
+    }
+
+    const newMessages = [...messages, newMessage]; //all the old message, + the new message
+
+    // update our messages state
+    setMessages(newMessages);
+
+    // set a typing indicator (chatgpt is taping)
+    setTyping(true);
+
+    // process message to chatGpt (send it over and the response)
+    await processMessageToChatGPT(newMessages);
+  }
+
+  async function processMessageToChatGPT(chatMessages) {
+    // chatMessages { sender: "user" or "chatGPT" message: "The message content here"}
+    // apiMessages { role: "user" or "assistant", content: "The message content here"}
+
+    let apiMessages = chatMessages.map((messageObject) => {
+      let role = "";
+      if(messageObject.sender === "ChatGPT") {
+        role = "assistant"
+      } else {
+        role = "user"
+      }
+      return { role: role, content: messageObject.message}
+    });
+
+    //role: "user" -> a message from th user, "assistant" -> a response from chatGPT
+    // "system" -> generally one initial message defining HOW we want chatgpt to talk
+
+    const systemMessage = {
+      role: "system",
+      content: "Explain all concepts like it's about cultural outings in France in French" // Speak  
+    }
+
+    const apiRequestBody = {
+      "model": "gpt-3.5-turbo",
+      "messages" : [
+        systemMessage, 
+        ...apiMessages // [message1,message2,message3]
+      ]
+    }
+
+    await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST", 
+      headers: {
+        "Authorization": "Bearer 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",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(apiRequestBody)
+    }).then((data) => {
+      return data.json();
+    }).then((data) => {
+      console.log(data);
+      console.log(data.choices[0].message.content);
+      setMessages(
+        [...chatMessages, {
+          message: data.choices[0].message.content,
+          sender: "ChatGPT"
+        }]
+      );
+      setTyping(false);
+    })
+  }
+
   return (
     <div className="App">
       <div className='header'>
         <img src={logoBlanc} className="logo_blanc" alt="Logo en noir de Sortie&Culture"/>
-        <p className='header_right'>Lancer le Chatbot</p>
+        <a href="#chatbot2"className='header_right'>Lancer le Chatbot</a>
       </div>
       <div className="content">
         <div className='filtre'>
@@ -25,7 +107,9 @@ function App() {
             recevez des réponses rapides et précises, et explorez de nouvelles activités culturelles dans votre 
             région. <br></br>Cliquez sur le bouton ci-dessous pour démarrer la conversation.
           </p>
-          <button className='button_home'>Lancer le Chatbot</button>
+          <button className='button_home'>
+            <a href="#chatbot2" className='aBis'>Lancer le Chatbot</a>
+          </button>
         </div>
       </div>
       <div className='duo'>
@@ -33,10 +117,10 @@ function App() {
           <h2 className='titre'>ㅤㅤLe concept</h2>
           <hr className='barre_desc'></hr>
             <div className='espace'>
-              <p className='texte2'>Notre chatbot est là pour vous aider à trouver des idées de sorties qui répondent à vos goûts et préférences. 
-                Vous pouvez poser des questions au chatbot, comme "Quelles sont les expositions d'art en cours dans ma ville ?", 
+              <p className='texte2'>Ophélia est là pour vous aider à trouver des idées de sorties qui répondent à vos goûts et préférences. 
+                Vous pouvez lui poser des questions, comme "Quelles sont les expositions d'art en cours dans ma ville ?", 
                 "Où puis-je trouver des concerts de musique classique ce week-end ?", ou "Y a-t-il des pièces de théâtre pour enfants 
-                dans les environs ?" et il vous fournira des réponses rapides et précises. </p>
+                dans les environs ?" et elle vous fournira des réponses rapides et précises. </p>
               <p className='texte2'>Notre base de données est constamment mise 
               à jour pour vous offrir les informations les plus récentes et les plus pertinentes sur les événements culturels de votre 
               région. Nous avons également des recommandations personnalisées pour vous aider à découvrir de nouveaux artistes, musées, 
@@ -49,7 +133,9 @@ function App() {
         </div>
       </div>
       <div className='center'>
-        <button className='button_home2'>Lancer le Chatbot</button>
+        <button className='button_home2'> 
+          <a href="#chatbot2" className='aBis'>Lancer le Chatbot </a>
+        </button>
       </div>
       <div className='art_culture'>
         <h2 className='titre_culture'>L'Art et la Culture</h2>
@@ -140,7 +226,9 @@ function App() {
         </div>
       </div>
       <div className='center'>
-        <button className='button_home2'>Lancer le Chatbot</button>
+        <button className='button_home2'> 
+          <a href="#chatbot2" className='aBis'>Lancer le Chatbot </a>
+        </button>
       </div>
       <div className='citation'>
         <div className='filtre2'>
@@ -149,41 +237,64 @@ function App() {
           <div className='auteur'>Edward T. Hall</div>
         </div>
       </div>
-      <div className='chatbot'>
-
-      </div>
-      <div className='footer'>
-      <div class="footer-dark">
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-md-3 item">
-                        <h3>Services</h3>
-                        <ul>
-                            <li><a href="#">Web design</a></li>
-                            <li><a href="#">Development</a></li>
-                            <li><a href="#">Hosting</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-6 col-md-3 item">
-                        <h3>About</h3>
-                        <ul>
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">Team</a></li>
-                            <li><a href="#">Careers</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 item text">
-                        <h3>Company Name</h3>
-                        <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
-                    </div>
-                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
-                </div>
-                <p class="copyright">Company Name © 2018</p>
+      <div id='chatbot2'></div>
+      <div className='duo3'>
+        <div className='gauche5'>
+          <div className='titre5'>ㅤParler avec Ophélia</div>
+          <hr className='barre_new'></hr>
+            <div className='desc_new2'>
+            Ophélia est un chatbot conçu pour vous aider à découvrir et à planifier des sorties culturelles dans votre région. 
+            Que vous cherchiez des événements culturels à proximité de chez vous ou que vous souhaitiez organiser une sortie 
+            culturelle, Ophélia est là pour vous aider. Avec une vaste base de données d'activités culturelles, de musées, de 
+            spectacles, de concerts et plus encore, Ophélia peut vous recommander des options adaptées à vos goûts et à vos intérêts. 
+            Avec sa convivialité et son efficacité, Ophélia est votre allié pour une expérience culturelle réussie.
             </div>
-        </footer>
-    </div>
+        </div>
+      <div style={{ position: "relative", height: "500px", width: "700px"}} id='chatbot'>
+        <MainContainer id='MainContainer'>
+          <ChatContainer>
+            <MessageList
+              scrollBehavior='smooth'
+              typingIndicator={typing ? <TypingIndicator content="Ophélia est train d'écrire"/> : null}
+            >
+              {messages.map((message,i) => {
+                return <Message key={i} model={message} />
+              })}
+            </MessageList>
+            <MessageInput placeholder='Tapez votre message ici' onSend={handleSend}/>
+          </ChatContainer>
+        </MainContainer>
       </div>
+      </div>
+      <footer>
+        <div className='tableau'>
+          <div className='APropos'>
+            <div className='titre4'>A propos</div>
+            <div className='texte_footer1'>Sortie&Culture est un chatbot pratique et facile d'utilisation qui permet à ses 
+            utilisateurs de découvrir les événements culturels se déroulant autour d'eux. Que ce soit des expositions, des concerts, 
+            des spectacles de théâtre, ou des projections de films, Sortie&Culture peut fournir des informations détaillées sur ces 
+            événements, y compris la date, l'heure et le lieu. En interagissant avec le chatbot, les utilisateurs peuvent préciser 
+            leurs préférences culturelles et leur emplacement géographique afin de recevoir des suggestions personnalisées pour leurs
+             sorties. Sortie&Culture est donc l'outil idéal pour les passionnés de culture qui souhaitent découvrir les événements 
+             les plus intéressants de leur région.</div>
+          </div>
+          <div className='info'>
+            <div className='titre4'>Information</div>
+            <div className='texte_footer'>Mentions légales</div>
+            <div className='texte_footer'>Confidantialité</div>
+            <div className='texte_footer'>Acessibilité</div>
+            <div className='texte_footer'>FAQ</div>
+          </div>
+          <div className='navigation'>
+            <div className='titre4'>Nous contacter</div>
+            <div className='texte_footer'>sortie&culture@paris.com</div>
+            <div className='texte_footer'>+33 01 23 45 67 89</div>
+            <div className='texte_footer'>Paris, France</div>
+          </div>
+        </div>
+        <hr className='barre_footer'></hr>
+        <div className='copyright'>Copyright © 2023 Sortie&Culture</div>
+      </footer>
     </div>
   );
 }
