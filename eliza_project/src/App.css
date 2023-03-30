@@ -22,33 +22,29 @@ a{
   height: 100vh;
 }
 
-.header {
-  overflow: hidden;
-  background-color: rgb(129, 0, 184);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
+body {
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  background-color: #f4f4f4;
 }
 
-.logo_blanc {
-  height: 40px;
-  margin-left: 10%;
-  margin-top: 20px;
+.button_white{
+  color: white;
 }
 
-.header_right {
-  margin-bottom: -20px;
+.button_white:hover{
+  color: rgb(129, 0, 184);
+}
+
+.hover-underline-animation {
   display: inline-block;
   position: relative;
   color: #ffffff;
+  margin-top: 15px;
   font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  margin-left: 50%;
 }
 
-.header_right::after {
+.hover-underline-animation::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -61,10 +57,146 @@ a{
   transition: transform 0.25s ease-out;
 }
 
-.header_right:hover::after {
+.hover-underline-animation:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+/* header */
+
+.header {
+  background-color: rgb(129, 0, 184);
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  height: 80px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: rgb(129, 0, 184);
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid rgb(129, 0, 184);
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: rgb(129, 0, 184);
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  padding: 20px 40px;
+  text-decoration: none;
+}
+
+.logo_blanc{
+  height: 50px;
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  padding: 38px 15px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #ffffff;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #ffffff;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 300px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+}
+
 
 .content {
   background-image: url(assets/galeries_des_glaces.jpeg);
@@ -330,7 +462,7 @@ h1{
   border-radius: 20px;
   background: rgb(129, 0, 184);
   text-align: end;
-  margin-left: 124.5px;
+  margin-left: 126px;
 }
 
 .cercle2 {
@@ -339,7 +471,7 @@ h1{
   border-radius: 20px;
   background: rgb(129, 0, 184);
   text-align: end;
-  margin-left: 124.5px;
+  margin-left: 126px;
   margin-top: 265px;
 }
 
@@ -349,7 +481,7 @@ h1{
   border-radius: 20px;
   background: rgb(129, 0, 184);
   text-align: end;
-  margin-left: 124.5px;
+  margin-left: 126px;
   margin-top: 260px;
 }
 
@@ -498,9 +630,9 @@ footer{
   margin-bottom: 50px;
 }
 
-.chatbot{
+#chatbot{
   height: 500px;
-  width: 50%;
+  width: 800px;
 }
 
 .duo3{
@@ -536,10 +668,51 @@ footer{
   width: 500px;
 }
 
+.grille{
+  width: 100%;
+}
 
+.cs-message__content{
+  background-color: rgb(129, 0, 184);
+  color: white;
+}
 
+.cs-button{
+  color: rgb(129, 0, 184);
+}
 
+.cs-message--outgoing .cs-message__content {
+  background-color: rgb(212, 135, 246);
+  color: white;
+}
 
+.cs-message-input__content-editor-wrapper{
+  background-color: rgb(244, 218, 255);
+}
+
+.cs-message-input__content-editor{
+  background-color: rgb(244, 218, 255);
+}
+
+.cs-typing-indicator__text{
+  color: rgb(129, 0, 184);
+}
+
+.cs-typing-indicator__dot{
+  background-color: rgb(129, 0, 184);
+}
+
+.ps__thumb-y{
+  background-color: rgb(244, 218, 255);
+}
+
+.ps__rail-y{
+  color: rgb(244, 218, 255);
+}
+
+.ps__rail-x{
+  color: rgb(129, 0, 184);
+}
 
 
 @media all and (max-width:480px){
@@ -548,23 +721,11 @@ footer{
     flex-direction: column;
     height: 100vh;
   }
-  
-  .header {
-    overflow: hidden;
-    background-color: rgb(129, 0, 184);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
+
+  .logo_blanc{
+    height: 40px;
   }
-  
-  .logo_blanc {
-    height: 50px;
-    margin-left: 10%;
-    margin-top: 30px;
-  }
-  
+
   .content {
     background-image: url(assets/galeries_des_glaces.jpeg);
     background-position: center;
@@ -578,13 +739,13 @@ footer{
   .filtre{
     background-color: rgba(0, 0, 0, 0.6);
     height: 100%;
-    margin-top: -40px;
+    margin-top: -20px;
     text-align: center;
   }
   
   h1{
     font-weight: lighter;
-    font-size: 60px;
+    font-size: 35px;
     color: white;
     text-align: center;
     padding-top: 170px;
@@ -594,18 +755,20 @@ footer{
   .barre_home{
     border-bottom: white 1px;
     text-align: center;
-    width: 500px;
+    width: 60%;
     height: 2px;
     background-color: white;
   }
   
   .courte_description{
     font-weight: lighter;
-    font-size: 20px;
+    font-size: 19px;
     color: white;
     text-align: center;
     padding-top: 30px;
     font-family: Arial, Helvetica, sans-serif;
+    margin-left: 20px;
+    margin-right: 20px;
   }
   
   .button_home{
@@ -630,19 +793,24 @@ footer{
   }
   
   .duo{
-    display: flex;
-    margin-top: 150px;
+    margin-top: 80px;
     margin-bottom: 100px;
+    display: block;
   }
   
   .gauche{
-    width: 50%;
+    width: 95%;
     padding-left: 5%;
     padding-right: 5%;
     font-family: Arial, Helvetica, sans-serif;
     margin-top: -30px;
   }
-  
+
+  .droite{
+    width: 100%;
+    text-align: center;
+  }
+
   .titre{
     color: rgb(255, 255, 255);
     font-size: 30px;
@@ -653,24 +821,23 @@ footer{
     height: 50px;
     margin-top: 20px;
     font-weight: lighter;
+    width: 380px;
+    white-space: nowrap;
   }
   
   .texte{
     color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     text-align: left;
     margin-left: 40px;
     margin-right: 40px;
+    margin-bottom: 60px;
   }
   
   .texte2{
     color: #787878;
     font-size: 20px;
-  }
-  
-  .droite{
-    width: 50%;
   }
   
   .musee_berlin{
@@ -690,7 +857,7 @@ footer{
     border: 1px solid transparent;
     padding: 0.4em 1em;
     margin-bottom: 80px;
-    margin-top: 50px;
+    margin-top: -20px;
   }
   
   .button_home2:hover{
@@ -719,26 +886,25 @@ footer{
   }
   
   .quatre{
-    display: flex;
+    display: block;
     width: 100%;
     text-align: center;
     padding-top: 100px;
   }
   
   .art{
-    width: 25%;
+    width: 100%;
   }
-  
   .danse{
-    width: 25%;
+    width: 100%;
   }
   
   .musique{
-    width: 25%;
+    width: 100%;
   }
   
   .theatre{
-    width: 25%;
+    width: 100%;
   }
   
   .art_img{
@@ -767,33 +933,41 @@ footer{
   }
   
   .duo2{
-    display: flex;
-    padding: 120px 70px 40px 100px;
+    display: block;
+    width: 100%;
+    margin-top: 80px;
+    margin-bottom: 100px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 0;
   }
   
   .gauche_new{
-    width: 40%;
+    width: 100%;
   }
   
   .space2{
-    width: 10%;
+    width: 100%;
   }
   
   .droite_new{
-    width: 50%;
+    width: 100%;
     border-left: rgb(129, 0, 184) solid;
+    margin-left: 20px;
+    margin-top: -930px;
   }
   
   .titre3{
     color: rgb(255, 255, 255);
-    font-size: 30px;
+    font-size: 24px;
     background-image: url(./assets/pinceaux.png);
     background-position: 0;
     background-size: 550px 100px;
     background-repeat: no-repeat;
-    height: 50px;
+    height: 43px;
     font-family: Arial, Helvetica, sans-serif;
     white-space: nowrap;
+    width: 100%;
   }
   
   .barre_new{
@@ -810,16 +984,17 @@ footer{
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 50px;
+    margin-right: 30px;
   }
   
   .sortie1{
-    display: flex;
+    display: block;
     font-family: Arial, Helvetica, sans-serif;
   }
   
   .monet_img{
     height: 150px;
-    margin-left: 50px;
+    margin-left: 40px;
     margin-right: 30px;
   }
   
@@ -829,7 +1004,8 @@ footer{
     border-radius: 20px;
     background: rgb(129, 0, 184);
     text-align: end;
-    margin-left: 124.5px;
+    margin-left: 11px;
+    margin-top: 40px;
   }
   
   .cercle2 {
@@ -838,8 +1014,8 @@ footer{
     border-radius: 20px;
     background: rgb(129, 0, 184);
     text-align: end;
-    margin-left: 124.5px;
-    margin-top: 265px;
+    margin-left: 11px;
+    margin-top: 460px;
   }
   
   .cercle3 {
@@ -848,51 +1024,61 @@ footer{
     border-radius: 20px;
     background: rgb(129, 0, 184);
     text-align: end;
-    margin-left: 124.5px;
-    margin-top: 260px;
+    margin-left: 11px;
+    margin-top: 410px;
   }
   
   .titre_spectacle{
     font-size: 20px;
     font-weight: 700;
     color: rgb(129, 0, 184);
+    margin-left: 40px;
+    margin-right: 40px;
   }
   
   .type{
     margin-top: 10px;
     font-size: 15px;
+    margin-left: 40px;
+    margin-right: 40px;
   }
   
   .quand{
     margin-top: 10px;
     font-size: 17px;
+    margin-left: 40px;
+    margin-right: 40px;
   }
   
   .lieu{
     margin-top: 10px;
     font-size: 17px;
+    margin-left: 40px;
+    margin-right: 40px;
   }
   
   .descriptif{
-    margin-left: 50px;
+    margin-left: 40px;
+    margin-right: 60px;
     margin-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
   }
   
   .descriptif1{
     margin-left: 50px;
+    margin-right: 60px;
     margin-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
-    margin-bottom: 30px;
+    margin-bottom: -40px;
   }
   
   .barre_claire{
     border-bottom: rgb(245, 245, 245) ;
-    width: 620px;
+    width: 70%;
     background-color: rgb(245, 245, 245);
     margin-top: 40px;
     margin-bottom: 40px;
-    margin-left: 50px;
+    margin-left: 40px;
   }
   
   .citation{
@@ -905,25 +1091,24 @@ footer{
   .guillemets{
     font-family: Arial, Helvetica, sans-serif;
     color: white;
-    font-size: 150px;
-    margin-left: 220px;
+    font-size: 100px;
+    margin-left: 20px;
   }
   
   .texte4{
     font-family: Arial, Helvetica, sans-serif;
     color: white;
-    font-size: 40px;
-    margin-left: 300px;
-    margin-right: 300px;
-    margin-top: -130px;
+    font-size: 25px;
+    margin-left: 80px;
+    margin-right: 20px;
   }
   
   .auteur{
     font-family: Arial, Helvetica, sans-serif;
     color: white;
     font-size: 15px;
-    margin-left: 300px;
-    margin-top: 20px;
+    margin-left: 80px;
+    margin-top: 10px;
   }
   
   .filtre2{
@@ -933,23 +1118,25 @@ footer{
   }
   
   .tableau{
-    display: flex;
-    padding-left: 100px;
-    padding-right: 100px;
+    display: block;
+    padding-left: 40px;
+    padding-right: 40px;
   }
   
   .APropos{
-    width: 50%;
+    width: 100%;
+    margin-bottom: -50px;
   }
   
   .info{
-    width: 25%;
-    margin-left: 200px;
+    width: 100%;
+    margin-left: 0px;
+    margin-bottom: -50px;
   }
   
   .navigation{
-    width: 25%;
-    margin-left: 50px;
+    width: 100%;
+    margin-left: 0px;
   }
   
   .titre4{
@@ -957,7 +1144,7 @@ footer{
     font-size: 20px;
     padding-top: 80px;
     font-family: Arial, Helvetica, sans-serif;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
   }
   
   .texte_footer{
@@ -972,20 +1159,22 @@ footer{
     font-size: 15px;
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
   
   footer{
     background-color: rgb(45, 0, 65);
     width: 100%;
+    margin-top: 200px;
   }
   
   .barre_footer{
     border-bottom: #bdbdbd ;
-    width: 87%;
+    width: 78%;
     background-color: #bdbdbd;
     margin-bottom: 40px;
-    margin-left: 100px;
+    margin-left: 40px;
+    margin-top: 20px;
   }
   
   .copyright{
@@ -993,22 +1182,24 @@ footer{
     font-size: 15px;
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 10px;
-    margin-left: 100px;
+    margin-left: 20%;
+    margin-right: 20%;
     margin-bottom: 50px;
   }
   
-  .chatbot{
-    height: 500px;
-    width: 50%;
+  #chatbot{
+    height: 800px;
+    width: 355px;
   }
   
   .duo3{
-    display: flex;
+    display: block;
     height: 800px;
+    margin-left: 5%;
+    margin-right: 0;
     margin-top: 80px;
-    margin-left: 100px;
-    margin-right: 50px;
     margin-bottom: 100px;
+    position: relative;
   }
   
   .titre5{
@@ -1024,7 +1215,7 @@ footer{
   }
   
   .gauche5{
-    width: 50%;
+    width: 100%;
   }
   
   .desc_new2{
@@ -1032,7 +1223,9 @@ footer{
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 50px;
-    width: 500px;
+    width: 100%;
+    margin-bottom: 50px;
+    margin-right: 50px;
   }
 
 }

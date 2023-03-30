@@ -14,6 +14,47 @@ import './App.css'
 import { useAttrs } from 'vue'
 
 function App() {
+
+  [count, setCount] = useState(0)
+
+  const lieu = ["Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Montpellier", "Starsbourg", "Bordeaux", "Lille"]
+
+  const activites = ["Musée", "Exposition", "Danse", "Musique", "Théâtre", "Site historique"]
+
+  const meteo = ["En extérieur", "En intérieur", "Les deux"]
+
+  const temps = ["Le matin", "Le midi", "L'après-midi", "En soirée", "La nuit"]
+
+  const showPropositions = () => {
+
+    if (count === 0){
+        return lieu.map((dest)=> <button key={dest} className="m-5" onClick={()=>{
+            incrementCount(dest);
+            window.scrollTo(0, document.body.scrollHeight);
+
+          }}>{dest}</button>);
+        }else if (count === 1){
+            return activites.map((dest)=> <button key={dest} className="m-5" onClick={()=>{
+                incrementCount(dest);
+                window.scrollTo(0, document.body.scrollHeight);
+    
+            }}>{dest}</button>);
+        }else if (count === 2){
+            return meteo.map((dest)=> <button key={dest} className="m-5" onClick={()=>{
+                incrementCount(dest);
+                window.scrollTo(0, document.body.scrollHeight);
+    
+            }}>{dest}</button>);
+        }else if (count === 3){
+            return temps.map((dest)=> <button key={dest} className="m-5" onClick={()=>{
+                incrementCount(dest);
+                window.scrollTo(0, document.body.scrollHeight);
+
+        }}>{dest}</button>);
+    }else if (count === 4){
+}
+  }
+
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -74,7 +115,7 @@ function App() {
     await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST", 
       headers: {
-        "Authorization": "Bearer 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",
+        "Authorization": "Bearer " + import.meta.env.VITE_APP_API_TOKEN,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(apiRequestBody)
@@ -95,10 +136,19 @@ function App() {
 
   return (
     <div className="App">
-      <div className='header'>
-        <img src={logoBlanc} className="logo_blanc" alt="Logo en noir de Sortie&Culture"/>
-        <a href="#chatbot2"className='header_right'>Lancer le Chatbot</a>
-      </div>
+      <header class="header">
+        <a href="" class="logo">
+          <img src={logoBlanc} className='logo_blanc' alt="logo Sortie&Culture en blanc"/>
+        </a>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu">
+          <li><a href="#first" className='header_right' class="hover-underline-animation">Le concept</a></li>
+          <li><a href="#second" className='header_right' class="hover-underline-animation">L'Art et la Culture</a></li>
+          <li><a href="#trois" className='header_right' class="hover-underline-animation">Les dernieres sorties culturelles</a></li>
+          <li><a href="#chatbot2" className='header_right' class="hover-underline-animation">Lancer le Chatbot</a></li>
+        </ul>
+      </header>
       <div className="content">
         <div className='filtre'>
           <h1>Découvrez les sorties à <br></br>faire autour de vous.</h1>
@@ -112,7 +162,8 @@ function App() {
           </button>
         </div>
       </div>
-      <div className='duo'>
+      <div id='first'></div>
+      <div className='duo' >
         <div className='gauche'>
           <h2 className='titre'>ㅤㅤLe concept</h2>
           <hr className='barre_desc'></hr>
@@ -133,8 +184,8 @@ function App() {
         </div>
       </div>
       <div className='center'>
-        <button className='button_home2'> 
-          <a href="#chatbot2" className='aBis'>Lancer le Chatbot </a>
+        <button className='button_home2' id='second'> 
+          <a className='button_white' href="#chatbot2" >Lancer le Chatbot </a>
         </button>
       </div>
       <div className='art_culture'>
@@ -166,7 +217,8 @@ function App() {
             corporels. </p>
           </div>
         </div>
-      </div>
+      </div> 
+      <div id='trois'></div>
       <div className='nouveauté'>
         <div className='duo2'>
           <div className='gauche_new'>
@@ -184,50 +236,48 @@ function App() {
             <div className='cercle3'></div>
           </div>
           <div className='droite_new'>
-            <div className='grille'>
-              <div className='sortie1'>
-                <img src={expoMonet} className="monet_img" alt="photo d'un peintre"/>
-                <div className='blabla'>
-                  <div className='titre_spectacle'>Monet / Fehr. Un Pont, Un Champ, Un Pays sans fin</div>
-                  <div className='type'>Exposition</div>
-                  <div className='quand'>📅 Du 15 novembre 2022 au 25 juin 2023</div>
-                  <div className='lieu'>📍Musée Marmottan Monet - 2 rue Louis Boilly, Paris</div>
-                </div>
+            <div className='sortie1'>
+              <img src={expoMonet} className="monet_img" alt="photo d'un peintre"/>
+              <div className='blabla'>
+                <div className='titre_spectacle'>Monet / Fehr. Un Pont, Un Champ, Un Pays sans fin</div>
+                <div className='type'>Exposition</div>
+                <div className='quand'>📅 Du 15 novembre 2022 au 25 juin 2023</div>
+                <div className='lieu'>📍Musée Marmottan Monet - 2 rue Louis Boilly, Paris</div>
               </div>
-              <div className='descriptif'>Le musée Marmottan Monet invite l'artiste suisse Marc Antoine Fehr à dialoguer avec ses 
-                collections.
+            </div>
+            <div className='descriptif'>Le musée Marmottan Monet invite l'artiste suisse Marc Antoine Fehr à dialoguer avec ses 
+              collections.
+            </div>
+            <hr className='barre_claire'></hr>
+            <div className='sortie1'>
+              <img src={nantes} className="monet_img" alt="photo d'un peintre"/>
+              <div className='blabla'>
+                <div className='titre_spectacle'>Le Voyage à Nantes</div>
+                <div className='type'>Manifestation artistique</div>
+                <div className='quand'>📅 Du 1 juillet au 3 septembre 2023</div>
+                <div className='lieu'>📍Ville de Nantes, Loire-Atlantique</div>
               </div>
-              <hr className='barre_claire'></hr>
-              <div className='sortie1'>
-                <img src={nantes} className="monet_img" alt="photo d'un peintre"/>
-                <div className='blabla'>
-                  <div className='titre_spectacle'>Le Voyage à Nantes</div>
-                  <div className='type'>Manifestation artistique</div>
-                  <div className='quand'>📅 Du 1 juillet au 3 septembre 2023</div>
-                  <div className='lieu'>📍Ville de Nantes, Loire-Atlantique</div>
-                </div>
+            </div>
+            <div className='descriptif'>Chaque été depuis 2012, le Voyage à Nantes met en scène la cité des Ducs de Bretagne en multipliant les propositions culturelles, gratuites.
+            </div>
+            <hr className='barre_claire'></hr>
+            <div className='sortie1'>
+              <img src={arles} className="monet_img" alt="photo d'un peintre"/>
+              <div className='blabla'>
+                <div className='titre_spectacle'>Les Rencontres d'Arles</div>
+                <div className='type'>Festival de photographie</div>
+                <div className='quand'>📅 Du 3 juillet au 24 septembre 2023</div>
+                <div className='lieu'>📍Ville d'Arles, Bouches du Rhône</div>
               </div>
-              <div className='descriptif'>Chaque été depuis 2012, le Voyage à Nantes met en scène la cité des Ducs de Bretagne en multipliant les propositions culturelles, gratuites.
-              </div>
-              <hr className='barre_claire'></hr>
-              <div className='sortie1'>
-                <img src={arles} className="monet_img" alt="photo d'un peintre"/>
-                <div className='blabla'>
-                  <div className='titre_spectacle'>Les Rencontres d'Arles</div>
-                  <div className='type'>Festival de photographie</div>
-                  <div className='quand'>📅 Du 3 juillet au 24 septembre 2023</div>
-                  <div className='lieu'>📍Ville d'Arles, Bouches du Rhône</div>
-                </div>
-              </div>
-              <div className='descriptif1'>Chaque été depuis 1970, Arles accueille Les Rencontres de la photographie, un festival de renommée internationale. 
-              </div>
+            </div>
+            <div className='descriptif1'>Chaque été depuis 1970, Arles accueille Les Rencontres de la photographie, un festival de renommée internationale. 
             </div>
           </div>
         </div>
       </div>
       <div className='center'>
         <button className='button_home2'> 
-          <a href="#chatbot2" className='aBis'>Lancer le Chatbot </a>
+          <a href="#chatbot2" className='button_white'>Lancer le Chatbot </a>
         </button>
       </div>
       <div className='citation'>
@@ -250,7 +300,7 @@ function App() {
             Avec sa convivialité et son efficacité, Ophélia est votre allié pour une expérience culturelle réussie.
             </div>
         </div>
-      <div style={{ position: "relative", height: "500px", width: "700px"}} id='chatbot'>
+      <div style={{ position: "relative", height: "500px"}} id='chatbot'>
         <MainContainer id='MainContainer'>
           <ChatContainer>
             <MessageList
@@ -266,6 +316,10 @@ function App() {
         </MainContainer>
       </div>
       </div>
+      <div>
+            {showPropositions()}
+      </div>
+
       <footer>
         <div className='tableau'>
           <div className='APropos'>
@@ -298,5 +352,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App
