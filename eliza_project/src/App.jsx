@@ -15,7 +15,7 @@ import { useAttrs } from 'vue'
 
 function App() {
 
-  [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   const lieu = ["Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Montpellier", "Starsbourg", "Bordeaux", "Lille"]
 
@@ -28,26 +28,22 @@ function App() {
   const showPropositions = () => {
 
     if (count === 0){
-        return lieu.map((dest)=> <button key={dest} className="m-5" onClick={()=>{
-            incrementCount(dest);
+        return lieu.map((dest)=> <button key={dest} className="propositions" onClick={()=>{
             window.scrollTo(0, document.body.scrollHeight);
 
           }}>{dest}</button>);
         }else if (count === 1){
-            return activites.map((dest)=> <button key={dest} className="m-5" onClick={()=>{
-                incrementCount(dest);
+            return activites.map((dest)=> <button key={dest} className="propositions" onClick={()=>{
                 window.scrollTo(0, document.body.scrollHeight);
     
             }}>{dest}</button>);
         }else if (count === 2){
-            return meteo.map((dest)=> <button key={dest} className="m-5" onClick={()=>{
-                incrementCount(dest);
+            return meteo.map((dest)=> <button key={dest} className="propositions" onClick={()=>{
                 window.scrollTo(0, document.body.scrollHeight);
     
             }}>{dest}</button>);
         }else if (count === 3){
-            return temps.map((dest)=> <button key={dest} className="m-5" onClick={()=>{
-                incrementCount(dest);
+            return temps.map((dest)=> <button key={dest} className="propositions" onClick={()=>{
                 window.scrollTo(0, document.body.scrollHeight);
 
         }}>{dest}</button>);
@@ -58,7 +54,7 @@ function App() {
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
-      message: "Bonjour, je suis Ophélia ! Posez moi une question concernant les dernières sorties culturelles et je vous répondrait avec joie !",
+      message: "Bonjour, je suis Ophélia ! Posez moi des questions concernant les dernières sorties culturelles et je vous répondrait avec joie !",
       sender: "ChatGpt"
     }
   ]) // []
@@ -287,7 +283,7 @@ function App() {
           <div className='auteur'>Edward T. Hall</div>
         </div>
       </div>
-      <div id='chatbot2'></div>
+      <div id='chatbot2'>ㅤ</div>
       <div className='duo3'>
         <div className='gauche5'>
           <div className='titre5'>ㅤParler avec Ophélia</div>
@@ -333,7 +329,7 @@ function App() {
              les plus intéressants de leur région.</div>
           </div>
           <div className='info'>
-            <div className='titre4'>Information</div>
+            <div className='titre4'>Informations</div>
             <div className='texte_footer'>Mentions légales</div>
             <div className='texte_footer'>Confidantialité</div>
             <div className='texte_footer'>Acessibilité</div>

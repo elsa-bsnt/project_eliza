@@ -180,7 +180,7 @@ body {
 
 /* 48em = 768px */
 
-@media (min-width: 48em) {
+@media (min-width: 480px) {
   .header li {
     float: left;
   }
@@ -712,6 +712,10 @@ footer{
 
 .ps__rail-x{
   color: rgb(129, 0, 184);
+}
+
+.propositions{
+  justify-content: space-between;
 }
 
 
