@@ -8,6 +8,7 @@ import theatre from './assets/theatre.jpeg'
 import expoMonet from './assets/expo_monet.jpg'
 import nantes from './assets/voyage_nantes.jpg'
 import arles from './assets/arles.jpg'
+import fleche from './assets/icons8-chevron-haut-48.png'
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css'
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator} from "@chatscope/chat-ui-kit-react"
 import './App.css'
@@ -25,31 +26,38 @@ function App() {
 
   const temps = ["Le matin", "Le midi", "L'après-midi", "En soirée", "La nuit"]
 
+  function incrementCount() {
+    setCount((count)=> count + 1 )
+  }
+
   const showPropositions = () => {
 
     if (count === 0){
         return lieu.map((dest)=> <button key={dest} className="propositions" onClick={()=>{
-            window.scrollTo(0, document.body.scrollHeight);
-
+          incrementCount(dest);
           }}>{dest}</button>);
+
         }else if (count === 1){
             return activites.map((dest)=> <button key={dest} className="propositions" onClick={()=>{
-                window.scrollTo(0, document.body.scrollHeight);
-    
+              incrementCount(dest);
             }}>{dest}</button>);
+
         }else if (count === 2){
             return meteo.map((dest)=> <button key={dest} className="propositions" onClick={()=>{
-                window.scrollTo(0, document.body.scrollHeight);
-    
+              incrementCount(dest);
             }}>{dest}</button>);
+            
         }else if (count === 3){
             return temps.map((dest)=> <button key={dest} className="propositions" onClick={()=>{
-                window.scrollTo(0, document.body.scrollHeight);
-
+              incrementCount(dest);
         }}>{dest}</button>);
+        
     }else if (count === 4){
 }
   }
+
+
+
 
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState([
@@ -58,7 +66,7 @@ function App() {
       sender: "ChatGpt"
     }
   ]) // []
-
+  
   const handleSend = async (message) => {
     const newMessage = {
       message: message,
@@ -92,12 +100,12 @@ function App() {
       return { role: role, content: messageObject.message}
     });
 
-    //role: "user" -> a message from th user, "assistant" -> a response from chatGPT
+    //role: "user" -> a message from the user, "assistant" -> a response from chatGPT
     // "system" -> generally one initial message defining HOW we want chatgpt to talk
 
     const systemMessage = {
       role: "system",
-      content: "Explain all concepts like it's about cultural outings in France in French" // Speak  
+      content: "Explique tout comme si ça concernait les sorties culturelles en France. Si cela ne concerne pas le sujet, alors redirige quelque chose en lien avec les sorties culturelles." // Speak  
     }
 
     const apiRequestBody = {
@@ -301,21 +309,20 @@ function App() {
           <ChatContainer>
             <MessageList
               scrollBehavior='smooth'
-              typingIndicator={typing ? <TypingIndicator content="Ophélia est train d'écrire"/> : null}
+              typingIndicator={typing ? <TypingIndicator content="Ophélia est en train d'écrire"/> : null}
             >
               {messages.map((message,i) => {
                 return <Message key={i} model={message} />
               })}
+                    <div className='prompt'>
+            {showPropositions()}
+      </div>
             </MessageList>
             <MessageInput placeholder='Tapez votre message ici' onSend={handleSend}/>
           </ChatContainer>
         </MainContainer>
       </div>
       </div>
-      <div>
-            {showPropositions()}
-      </div>
-
       <footer>
         <div className='tableau'>
           <div className='APropos'>
@@ -345,6 +352,7 @@ function App() {
         <hr className='barre_footer'></hr>
         <div className='copyright'>Copyright © 2023 Sortie&Culture</div>
       </footer>
+      <a href="#" class="top"><img src={fleche} alt="flèche vers le haut" className='fleche'/></a>
     </div>
   );
 }
