@@ -105,7 +105,7 @@ function App() {
 
     const systemMessage = {
       role: "system",
-      content: "Explique tout comme si ça concernait les sorties culturelles en France. Si cela ne concerne pas le sujet, alors redirige quelque chose en lien avec les sorties culturelles." // Speak  
+      content: "Reponds moi en parlant seulement des sorties culturelles en France et rien d'autre. Si une question ne correspond pas au sujet, fait un lien avec le sujet." // Speak  
     }
 
     const apiRequestBody = {
@@ -314,9 +314,7 @@ function App() {
               {messages.map((message,i) => {
                 return <Message key={i} model={message} />
               })}
-                    <div className='prompt'>
-            {showPropositions()}
-      </div>
+
             </MessageList>
             <MessageInput placeholder='Tapez votre message ici' onSend={handleSend}/>
           </ChatContainer>

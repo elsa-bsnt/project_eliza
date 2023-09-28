@@ -1267,13 +1267,13 @@ footer{
 }
 
 .top {
-  --offset: 50px; 
+  --offset: -50px; 
   
   position: sticky;
   bottom: 20px;      
   margin-right:10px; 
   place-self: end;
-  margin-top: calc(100vh + var(--offset));
+  margin-top: calc(0vh + var(--offset));
   
   /* visual styling */
   text-decoration: none;
